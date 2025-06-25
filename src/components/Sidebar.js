@@ -20,6 +20,8 @@
 import React from 'react';
 import { Home, Compass, Video, ThumbsUp, Clock, Download, History, Music, Dribbble, Gamepad2, Film } from 'lucide-react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 const Sidebar = () => {
                              
 const isMenuOpen = useSelector((store) => store.app.isMenuOpen);   //sidebar menu component subcribing to the store
@@ -27,10 +29,11 @@ const isMenuOpen = useSelector((store) => store.app.isMenuOpen);   //sidebar men
 if(!isMenuOpen) return null;   //early return pattern
   return (
     <div className="w-60 p-4 shadow-md h-screen">
-      x
+      
       <ul className="space-y-2 mb-6">
-        <li className="flex items-center gap-3 cursor-pointer hover:bg-gray-100 p-2 rounded">
-          <Home size={18} /> <span>Home</span>
+        <li>
+        <Link to="/" className="flex items-center gap-3 cursor-pointer hover:bg-gray-100 p-2 rounded">
+        <Home size={18} /> <span>Home</span></Link> 
         </li>
         <li className="flex items-center gap-3 cursor-pointer hover:bg-gray-100 p-2 rounded">
           <Compass size={18} /> <span>Explore</span>

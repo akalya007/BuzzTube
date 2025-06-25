@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { YOUTUBE_VEDIO_API } from '../utils/constant';
 import VedioCards from './VedioCards';
+import { Link } from 'react-router-dom';
 
 
 const VedioContainer = () => {
@@ -25,7 +26,7 @@ useEffect(()=>{
 // </div>
 <div className="flex flex-wrap justify-center gap-4 ">
   {vedios.map((vedio) => (
-    <VedioCards key={vedio.id} info={vedio} />
+   <Link to={"/watch?v=" + vedio.id}>  <VedioCards key={vedio.id} info={vedio} />  </Link>
   ))}
 </div>
 

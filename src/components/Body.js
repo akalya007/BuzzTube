@@ -1,15 +1,20 @@
-import React from 'react'
+import React from 'react';
 import Sidebar from './Sidebar';
-import MainContainer from './MainContainer';
+import { Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Body = () => {
+  const isMenuOpen = useSelector((store) => store.app.isMenuOpen);
+
   return (
     <div className="flex h-screen">
-      <div className="w-60 overflow-y-scroll border-r">
-        <Sidebar />
-      </div>
-      <div className="flex-1 overflow-y-scroll">
-        <MainContainer />
+      {isMenuOpen && (
+        <div className="w-60 overflow-y-scroll border-r">
+          <Sidebar />
+        </div>
+      )}
+      <div className={`overflow-y-scroll ${isMenuOpen ? 'flex-1' : 'w-full'}`}>
+        <Outlet />
       </div>
     </div>
   );

@@ -4,11 +4,10 @@ import VedioContainer from './VedioContainer'
 
 const MainContainer = () => {
   return (
-    <div>
-<ButtonList />
-<VedioContainer />
-
-    </div>
+   <div className="h-full min-w-screen">
+  <ButtonList />
+  <VedioContainer />
+</div>
   )
 }
 

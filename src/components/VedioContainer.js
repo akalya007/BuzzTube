@@ -26,7 +26,8 @@ useEffect(()=>{
 // </div>
 <div className="flex flex-wrap justify-center gap-4 ">
   {vedios.map((vedio) => (
-   <Link to={"/watch?v=" + vedio.id}>  <VedioCards key={vedio.id} info={vedio} />  </Link>
+   <Link   key={vedio.id} to={"/watch?v=" + vedio.id}> 
+    <VedioCards info={vedio} />  </Link>
   ))}
 </div>
 

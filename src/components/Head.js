@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from 'react'; // ❌ removed unused 'cache'
+import { useDispatch , useSelector } from "react-redux";
 import { toggleMenu } from '../utils/appSlice';
 import { YOUTUBE_SEARCH_API } from '../utils/constant';
+import { cacheResults } from '../utils/searchSlice';
 
 const Head = () => {
 
@@ -9,22 +10,38 @@ const Head = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestion, setShowSuggestion] = useState(false);
 
+  const searchCache = useSelector((store) => store.search);
+  const dispatch = useDispatch();
+
+  /**
+   *  searchCache = {
+   *     "iphone": ["iphone 11", "iphone 14"]
+   *  }
+   *  searchQuery = iphone
+   */
   useEffect(() => { //make the API CALL for every key press
     const timer = setTimeout(() => { //but if the difference between 2 API call is less than 200ms , then decline the api call
+     if(searchCache[searchQuery]){
+      setSuggestions(searchCache[searchQuery]);
+     }else{
+     
       const getSearchSuggestions = async () => {
         console.log("===>", searchQuery);
         const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
         const json = await data.json();
         setSuggestions(json[1]);
+
+        dispatch(cacheResults({
+          [searchQuery]:json[1],
+        }));
       };
 
       getSearchSuggestions();
-    }, 200);
+    }}, 200);
 
     return () => clearTimeout(timer);
-  }, [searchQuery]);
+  }, [searchQuery, dispatch, searchCache]); // ✅ fixed eslint warning by adding dispatch and searchCache
 
-  const dispatch = useDispatch();
   const toggleMenuHandler = () => { //this dispatch the action.
     dispatch(toggleMenu());
   };

@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'; // ❌ removed unused 'cache'
+import React, { useEffect, useState } from 'react'; 
 import { useDispatch , useSelector } from "react-redux";
 import { toggleMenu } from '../utils/appSlice';
+
 import { YOUTUBE_SEARCH_API } from '../utils/constant';
 import { cacheResults } from '../utils/searchSlice';
 
@@ -19,28 +20,43 @@ const Head = () => {
    *  }
    *  searchQuery = iphone
    */
-  useEffect(() => { //make the API CALL for every key press
-    const timer = setTimeout(() => { //but if the difference between 2 API call is less than 200ms , then decline the api call
-     if(searchCache[searchQuery]){
+  
+  useEffect(() => {      //make the API CALL for every key press
+  if (!searchQuery.trim()) return; // Skip API and cache logic if query is empty
+
+  const timer = setTimeout(() => {//but if the difference between 2 API call is less than 200ms , then decline the api call
+    if (searchCache[searchQuery]) {
       setSuggestions(searchCache[searchQuery]);
-     }else{
-     
+    } else {
       const getSearchSuggestions = async () => {
         console.log("===>", searchQuery);
-        const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
-        const json = await data.json();
-        setSuggestions(json[1]);
-
-        dispatch(cacheResults({
-          [searchQuery]:json[1],
-        }));
+        try {
+          const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+          const json = await data.json();
+          
+          // Defensive check
+          if (Array.isArray(json) && json.length > 1 && Array.isArray(json[1])) {
+            setSuggestions(json[1]);
+            dispatch(cacheResults({
+              [searchQuery]: json[1],
+            }));
+          } else {
+            console.warn("Unexpected API format", json);
+            setSuggestions([]);
+          }
+        } catch (err) {
+          console.error("Failed to fetch suggestions    akalya", err);
+          setSuggestions([]);
+        }
       };
 
       getSearchSuggestions();
-    }}, 200);
+    }
+  }, 200);
 
-    return () => clearTimeout(timer);
-  }, [searchQuery, dispatch, searchCache]); // ✅ fixed eslint warning by adding dispatch and searchCache
+  return () => clearTimeout(timer);
+}, [searchQuery, dispatch, searchCache]);
+
 
   const toggleMenuHandler = () => { //this dispatch the action.
     dispatch(toggleMenu());
@@ -104,18 +120,20 @@ const Head = () => {
 
 export default Head;
 
-/**
- * Note😀
- * 
- * key - i
- * -render the Component
- * -useEffect();
- * start the timer ==> make the api call after 200ms
- * 
- * 
- * key-ip
- * -if we type before completing 200ms , the it destroys the component (useEffect return method is called. then the new timer is set.)
- * -re-render the Componenet ( if , we type before the 200ms ,the it will trigger the reconcilation method , the component is unmounted , then the useEffect is called second ti me,)
- * -useEffect()
- * -start timer ==> to make api call after 200ms.
- */
+// /**
+//  * Note😀
+//  * 
+//  * key - i
+//  * -render the Component
+//  * -useEffect();
+//  * start the timer ==> make the api call after 200ms
+//  * 
+//  * 
+//  * key-ip
+//  * -if we type before completing 200ms , the it destroys the component (useEffect return method is called. then the new timer is set.)
+//  * -re-render the Componenet ( if , we type before the 200ms ,the it will trigger the reconcilation method , the component is unmounted , then the useEffect is called second ti me,)
+//  * -useEffect()
+//  * -start timer ==> to make api call after 200ms.
+//  */
+
+

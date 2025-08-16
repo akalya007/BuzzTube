@@ -295,7 +295,8 @@ const Head = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestion, setShowSuggestion] = useState(false);
 
-  const searchCache = useSelector((store) => store.search);
+  // const searchCache = useSelector((store) => store.search);
+  const searchCache = useSelector ((store) => store?.search || {} );
   const dispatch = useDispatch();
 
   /**

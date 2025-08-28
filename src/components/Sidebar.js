@@ -35,9 +35,14 @@ if(!isMenuOpen) return null;   //early return pattern
         <Link to="/" className="flex items-center gap-3 cursor-pointer hover:bg-gray-100 p-2 rounded">
         <Home size={18} /> <span>Home</span></Link> 
         </li>
+       <li className="flex items-center gap-3 cursor-pointer hover:bg-gray-100 p-2 rounded">
+           <Link to="/demo"><span>Demo</span></Link>
+        </li>
+
         <li className="flex items-center gap-3 cursor-pointer hover:bg-gray-100 p-2 rounded">
           <Compass size={18} /> <span>Explore</span>
         </li>
+        
         <li className="flex items-center gap-3 cursor-pointer hover:bg-gray-100 p-2 rounded">
           <Video size={18} /> <span>Shorts</span>
         </li>

@@ -192,6 +192,7 @@ export function makeRandomMessage(length) {
   return result;
 }
 
+// calculation to understand the usememo
 export const findPrime = (num) => {
   let i,
     primes = [2, 3],

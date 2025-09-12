@@ -265,21 +265,21 @@
 
 // export default Head;
 
-// // /**
-// //  * Note😀
-// //  * 
-// //  * key - i
-// //  * -render the Component
-// //  * -useEffect();
-// //  * start the timer ==> make the api call after 200ms
-// //  * 
-// //  * 
-// //  * key-ip
-// //  * -if we type before completing 200ms , the it destroys the component (useEffect return method is called. then the new timer is set.)
-// //  * -re-render the Componenet ( if , we type before the 200ms ,the it will trigger the reconcilation method , the component is unmounted , then the useEffect is called second ti me,)
-// //  * -useEffect()
-// //  * -start timer ==> to make api call after 200ms.
-// //  */
+// /**
+//  * Note😀
+//  * 
+//  * key - i
+//  * -render the Component
+//  * -useEffect();
+//  * start the timer ==> make the api call after 200ms
+//  * 
+//  * 
+//  * key-ip
+//  * -if we type before completing 200ms , the it destroys the component (useEffect return method is called. then the new timer is set.)
+//  * -re-render the Componenet ( if , we type before the 200ms ,the it will trigger the reconcilation method , the component is unmounted , then the useEffect is called second ti me,)
+//  * -useEffect()
+//  * -start timer ==> to make api call after 200ms.
+//  */
 
 
 

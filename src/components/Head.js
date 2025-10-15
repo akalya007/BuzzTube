@@ -347,7 +347,7 @@ const Head = () => {
 
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
-  };
+  };  
 
   // Improved handling of blur to allow clicking on suggestions before hiding the list:
   // Use onMouseDown on suggestions container to prevent blur hiding prematurely

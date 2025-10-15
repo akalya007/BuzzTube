@@ -42,7 +42,7 @@ const LiveChat = () => {
           e.preventDefault();
           dispatch(
             addMessage({
-              name: "Akshay Saini",
+              name: "Akalya",
               message: liveMessage,
             })
           );

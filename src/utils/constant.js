@@ -10,8 +10,11 @@ export const YOUTUBE_VEDIO_API =
  + GOOGLE_API_KEY;
 
 
-export const YOUTUBE_SEARCH_API =
-"https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
+// export const YOUTUBE_SEARCH_API =
+// "https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
+
+// Local development
+export const YOUTUBE_SEARCH_API = "http://localhost:5000/api/search?q=";
 
 
 //   const GOOGLE_API_KEY = "AIzaSyAtIibgU4boIyzkgbabBCe8BJJsBSfNlWA";

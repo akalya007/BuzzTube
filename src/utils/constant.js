@@ -13,11 +13,13 @@ export const YOUTUBE_VEDIO_API =
 // export const YOUTUBE_SEARCH_API =
 // "https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
 
-// Local development
-export const YOUTUBE_SEARCH_API = "http://localhost:5000/api/search?q=";
+// // Local development
+// export const YOUTUBE_SEARCH_API = "http://localhost:5000/api/search?q=";
 
-
+//  export const YOUTUBE_SEARCH_API = "http://localhost:5000/api/search?q=";
 //   const GOOGLE_API_KEY = "AIzaSyAtIibgU4boIyzkgbabBCe8BJJsBSfNlWA";
+
+export const YOUTUBE_SEARCH_API = "https://buzztube-server.onrender.com/api/search?q=";
 
  export const LIVE_CHAT_COUNT = 25;
 
